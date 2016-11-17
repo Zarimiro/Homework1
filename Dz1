@@ -1,0 +1,46 @@
+
+#include<stdlib.h>
+#include<time.h>
+#include<conio.h>
+#include<string.h>
+#include<iostream>
+using namespace std;
+
+int main()
+{   
+	char input[5] = { 65,67,72,71,'\0' };
+	cout << input << endl;
+	char gamma[5];
+	char output[5];
+	char rez[5];
+	srand(time(0));
+
+	for (int i = 0; i < 4; i++) {
+	// gamma[i] = 100 + rand()%5; //при таком еррорит
+		gamma[i] = 70+i + rand()%5 ;
+	 output[i] = gamma[i] ^ input[i];
+	 cout << "Gamma of the " << i + 1 << " element:" << gamma[i] << endl;
+	 cout << "Encryption of the " << i + 1 << " element:" << output[i] << endl;
+	 output[i] = output[i] << 2;
+	 cout << "2nd Encryption of the " << i + 1 << " element:" << output[i] << endl;
+	}
+	cout << "Full encryption:" << output[0] << output[1] << output[2] << output[3];
+
+
+	cout << "\n\n\n\n\n\n\nDecryption:" << endl;
+	for (int i = 0; i < 4; i++) {
+		cout << "2nd Encryption of the " << i + 1 << " element:" << output[i] << endl;
+		output[i] = output[i] >> 2;
+		cout << "Encryption of the " << i + 1 << " element:" << output[i] << endl;
+		rez[i] = gamma[i] ^ output[i];
+		cout << "Gamma of the " << i + 1 << " element:" << gamma[i] << endl;
+		cout << "Decryption of the " << i + 1 << " element:" << rez[i] << endl;
+	}
+	cout << "Full decryption:" << rez[0] << rez[1] << rez[2] << rez[3];
+	
+
+
+	_getch();
+
+	return 0;
+}
