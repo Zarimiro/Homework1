@@ -1,0 +1,68 @@
+#include<stdlib.h>
+#include<time.h>
+#include<conio.h>
+#include<iostream>
+using namespace std;
+
+int main()
+{
+//input
+	char input[128];
+	cin.getline(input, 128);
+	int length = strlen(input);
+	char output[128];
+	char gamma[128];
+	char rez[128];
+	char sdvig[128];
+	char sdvig2[128];
+	char SDVIG[128];
+	char sdvig3[128];
+	char sdvig4[128];
+	char SDVIG2[128];
+//encrypt
+	length % 4 == 0 ? length += 0 : length++;
+	length % 4 == 0 ? length += 0 : length++;
+	length % 4 == 0 ? length += 0 : length++;
+	srand(time(0));
+	int d = 0;
+	int f = 3;
+	while (f <= length){
+
+		for (int i = d; i <= f; i++) {
+
+			gamma[i] = rand() % 75;
+			output[i] = gamma[i] ^ input[i];
+			sdvig[i] = output[i] << 2;
+			sdvig2[i] = output[i] >> 6;
+			SDVIG[i] = sdvig[i] | sdvig2[i];
+		
+		}
+	d += 4;
+	f += 4;
+	}
+	
+
+	cout << endl;
+	
+
+
+
+	//decrypt
+	int D = 0;
+	int F = 3;
+	while (F <= length) {
+
+		for (int i = D; i <= F; i++) {
+			sdvig3[i] = SDVIG[i] >> 2;
+			sdvig4[i] = SDVIG[i] << 6;
+			SDVIG2[i] = sdvig3[i] | sdvig4[i];
+			rez[i] = gamma[i] ^ SDVIG2[i];
+			cout << rez[i];
+		}
+		D += 4;
+		F += 4;
+	}
+
+	_getch();
+	return 0;
+}
